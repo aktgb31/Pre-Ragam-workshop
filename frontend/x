@@ -1,0 +1,53 @@
+
+ /* Define global styles */
+ body {
+    font-family: Arial, sans-serif;
+  }
+  a {
+    color: #333;
+    text-decoration: none;
+  }
+  /* Header styles */
+  header {
+    background-color: #eee;
+    padding: 20px;
+  }
+  nav ul {
+    display: flex;
+    justify-content: space-between;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  nav li {
+    display: inline-block;
+    margin-right: 20px;
+  }
+  /* Main content styles */
+  main {
+    padding: 20px;
+    text-align: center;
+    margin-right: 25%;
+  }
+  h1, h2, h3 {
+    color: #333;
+    margin-bottom: 10px;
+  }
+  img {
+    height: 200px;
+    width: 200px;
+  }
+  /* Footer styles */
+  footer {
+    background-color: #eee;
+    padding: 20px;
+    text-align: center;
+  }
+  /* Sidebar */
+  aside {
+    background-color: #eee;
+    padding: 20px;
+    text-align: center;
+    right: 0%;
+    width: 25%;
+  }
