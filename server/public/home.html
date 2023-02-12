@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>My E-commerce Store</title>
+    <link rel="stylesheet" type="text/css" href="home_style.css">
+</head>
+
+<body>
+
+    <main>
+        <header>
+            <ul>
+                <li><a href="">Home</a></li>
+                <li style="float:right"><a class="active" href="logOut">LogOut</a></li>
+            </ul>
+        </header>
+        <div>
+            <h1>Welcome to My E-commerce Store</h1>
+            <p>Here you will find a variety of products for sale.</p>
+            <h2>Featured Products</h2>
+            <div id="products"> </div>
+        </div>
+
+        <footer>
+            <p>Copyright © 2023 My E-commerce Store</p>
+        </footer>
+    </main>
+    <aside>
+        <h2>Cart</h2>
+
+
+        <div id="cart-items"></div>
+
+        <p id="total-price">Total Price: $0.00</p>
+        <button id="checkout-button" onclick="checkout()">Checkout</button>
+    </aside>
+
+    <script src="home_script.js"></script>
+</body>
+
+</html>

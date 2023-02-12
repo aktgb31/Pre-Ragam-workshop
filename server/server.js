@@ -77,22 +77,25 @@ sequelize.sync({ force: true }).then(() => {
 
     Product.create({
         id: 1,
-        name: "product 1",
-        description: "this is the product 1",
-        cost: 5000
+        name: "Canon Camera",
+        description: "Cool canon DSLR Camera",
+        cost: 500,
+        image: "https://m.media-amazon.com/images/I/914hFeTU2-L._SL1500_.jpg"
     });
 
     Product.bulkCreate([
         {
             id: 2,
-            name: "prduct 2",
-            description: "this is product 2",
-            cost: 4000
+            name: "Iphone 14 Pro Max",
+            description: "Brand new Iphone 14 Pro Max by Apple",
+            cost: 1200,
+            image: "https://m.media-amazon.com/images/I/71yzJoE7WlL._SX522_.jpg"
         }, {
             id: 3,
-            name: "product 3",
-            description: "this is a new brand mobile phone ",
-            cost: 40000
+            name: "Ipad Pro",
+            description: "Brand new Ipad Pro by Apple",
+            cost: 40000,
+            image: "https://images.hindustantimes.com/tech/img/2021/09/14/1600x900/WhatsApp_Image_2021-09-14_at_5.13.31_PM_1631623490905_1631623503195.jpeg"
         }
     ])
 
@@ -153,7 +156,6 @@ app.post("/login", async (req, res) => {
 
 
 // making route to get all prodoucts
-
 app.get("/products", (req, res) => {
     let promise;
 
@@ -163,9 +165,6 @@ app.get("/products", (req, res) => {
         res.status(200).send(products);
     });
 
-    // sequelize.findALl
-
-    // res.status(200).send(products);
 });
 
 // making route to get a product on the basis of given product id
@@ -183,6 +182,21 @@ app.get("/product/:id", (req, res) => {
             res.status(500).send("error while fetching data from product table");
         });
 });
+
+// Routes for cart
+// 1. add product to cart
+// 2. remove product from cart
+// 3. get all products from cart
+
+app.post("/cart", async (req, res) => {
+});
+
+app.get("/cart", async (req, res) => {
+});
+
+app.delete("/cart", async (req, res) => {
+});
+
 
 // ___________ starting server ____________________
 
