@@ -7,25 +7,62 @@ let total = 0;
 
 function addToCart(elem) {
     const parentNode = elem.parentNode;
+    const itemId = parentNode.id.split("-")[1];
     const itemName = parentNode.getElementsByClassName("product-name")[0].innerText;
     const itemPrice = parseFloat(parentNode.getElementsByClassName("product-price")[0].innerText);
     const itemImage = parentNode.getElementsByTagName("img")[0].src;
-    console.log(itemName, itemPrice, itemImage);
+    console.log(itemId, itemName, itemPrice, itemImage);
+
     const item = {
-        id: cart.length + 1,
         name: itemName,
         price: itemPrice,
         image: itemImage
     }
-    cart.push(item);
-    updateCart();
+
+    fetch("http://localhost:4000/cart", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            productId: itemId
+        })
+    }).then(res => res.json()).then(data => {
+        console.log(data);
+        if (data) {
+            item.id = data.id;
+            cart.push(item);
+            updateCart();
+        } else {
+            alert(data.message);
+        }
+    }).catch(err => {
+        console.log(err);
+        alert(err.message);
+    });
+
 };
 
 function removeFromCart(id) {
-    cart = cart.filter((cartItem) => {
-        return cartItem.id !== id;
+    fetch(`http://localhost:4000/cart/${id}`, {
+        method: "DELETE"
+    }).then(res => res.json()).then(data => {
+        console.log(data);
+        if (data) {
+            cart = cart.filter((cartItem) => {
+                return cartItem.id !== id;
+
+            })
+            updateCart();
+        }
+        else {
+            alert(data.message);
+        }
+    }).catch(err => {
+        console.log(err);
+        alert(err.message);
     });
-    updateCart();
+
 }
 
 function updateCart() {
@@ -78,4 +115,21 @@ async function loadProducts() {
     }
 }
 
-loadProducts();
+async function loadCart() {
+    const cartItems = await fetch("http://localhost:4000/cart").then(res => res.json());
+
+    console.log(cartItems);
+
+    for (const item of cartItems) {
+        const cartItem = {
+            id: item.id,
+            name: item.product.name,
+            price: item.product.cost,
+            image: item.product.image
+        }
+        cart.push(cartItem);
+    }
+    updateCart();
+}
+
+loadProducts().then(loadCart);
